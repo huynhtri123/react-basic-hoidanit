@@ -1,4 +1,5 @@
 import React from 'react';
+import ChildComponent from './ChildComponent';
 
 // 2 components: class component / function component (func, arrow func)
 //JSX: thay vi tra ve 1 bien thi no tra ve 1 dong html (code html trong file js)
@@ -9,47 +10,51 @@ import React from 'react';
 class MyComponent extends React.Component {
 
     state = {
-        name: '',
-        age: 20
+        firstName: '',
+        lastName: ''
     }
 
-    handleOnChangeName = (event) => {
+    handleChangeFirstName = (event) => {
         this.setState({
-            name: event.target.value
+            firstName: event.target.value
         })
     }
-    //arrow func
-    handleClickButotn = () => {
-        alert("Clicked");
+    handleChangeLastName = (event) => {
+        this.setState({
+            lastName: event.target.value
+        })
     }
-    handleEnterInput = (event) => {
-        if (event.key === 'Enter') {
-            alert("entered input");
-        }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        console.log('>>>check data:', this.state)
     }
 
     render() {
-
-        let name = "Tri";
-
+        console.log('>>>check state:', this.state);
         return (
             <>
-                <div className='first'>
-                    {console.log('My name is :', name)}
+                <form>
+                    <label htmlFor="fname">First name:</label><br />
                     <input
-                        value={this.state.name}
-                        type='text'
-                        onChange={(event) => { this.handleOnChangeName(event) }}
-                        onKeyDown={(event) => this.handleEnterInput(event)}
+                        type="text"
+                        value={this.state.firstName}
+                        onChange={(event) => this.handleChangeFirstName(event)}
+                    /><br />
+                    <label htmlFor="lname">Last name:</label><br />
+                    <input
+                        type="text"
+                        value={this.state.lastName}
+                        onChange={(event) => this.handleChangeLastName(event)}
+                    /><br /><br />
+                    <input
+                        type="submit"
+                        value="Submit"
+                        onClick={(event) => this.handleSubmit(event)}
                     />
-                    Hello components, my name is {this.state.name}
-                </div>
-                <div className='second'>
-                    My age: {this.state.age}
-                </div>
-                <div className='third'>
-                    <button onClick={() => this.handleClickButotn()}>Click me</button>
-                </div>
+                </form>
+                <ChildComponent name={'child 1'} />
+                <ChildComponent name={'child 2'} />
+                <ChildComponent name={'child 3'} />
             </>
         )
 
