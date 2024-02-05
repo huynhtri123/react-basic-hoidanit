@@ -9,7 +9,7 @@ import React from 'react';
 class MyComponent extends React.Component {
 
     state = {
-        name: 'Tri1',
+        name: '',
         age: 20
     }
 
@@ -18,8 +18,14 @@ class MyComponent extends React.Component {
             name: event.target.value
         })
     }
+    //arrow func
     handleClickButotn = () => {
         alert("Clicked");
+    }
+    handleEnterInput = (event) => {
+        if (event.key === 'Enter') {
+            alert("entered input");
+        }
     }
 
     render() {
@@ -30,7 +36,12 @@ class MyComponent extends React.Component {
             <>
                 <div className='first'>
                     {console.log('My name is :', name)}
-                    <input value={this.state.name} type='text' onChange={(event) => { this.handleOnChangeName(event) }}></input>
+                    <input
+                        value={this.state.name}
+                        type='text'
+                        onChange={(event) => { this.handleOnChangeName(event) }}
+                        onKeyDown={(event) => this.handleEnterInput(event)}
+                    />
                     Hello components, my name is {this.state.name}
                 </div>
                 <div className='second'>
