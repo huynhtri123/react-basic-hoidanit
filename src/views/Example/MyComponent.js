@@ -18,14 +18,32 @@ class MyComponent extends React.Component {
         ]
     }
 
+    addNewJob = (job) => {
+        console.log('>>>check new job:', job)
+        this.setState({
+            arrJobs: [...this.state.arrJobs, job]
+        })
+    }
+
+    deleteAJob = (job) => {
+        let currJob = this.state.arrJobs;
+        currJob = currJob.filter(item => item.id !== job.id);
+        this.setState({
+            arrJobs: currJob
+        })
+    }
+
     render() {
-        console.log('>>>check state:', this.state);
+        console.log('>>>check state cha:', this.state);
         return (
             <>
-                <AddComponent />
+                <AddComponent
+                    addNewJob={this.addNewJob}
+                />
 
                 <ChildComponent
                     arrayJobs={this.state.arrJobs}
+                    deleteAJob={this.deleteAJob}
                 />
             </>
         )
