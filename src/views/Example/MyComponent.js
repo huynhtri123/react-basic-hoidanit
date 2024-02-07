@@ -33,8 +33,19 @@ class MyComponent extends React.Component {
         })
     }
 
+    //sau nay dung goi api/route from backend
+    componentDidMount() {
+        console.log('********run did mount');
+    }
+
+    //sau nay khi goi api, khi can so sanh data current vs future
+    //dung khi thao tac giua con vs cha (khi cha thay doi thi update con -> dung ham nay)
+    componentDidUpdate(preProps, preState) {
+        console.log('***preState: ', preState, ' currState:', this.state)
+    }
+
     render() {
-        console.log('>>>check state cha:', this.state);
+        console.log('>>>check state:', this.state);
         return (
             <>
                 <AddComponent
